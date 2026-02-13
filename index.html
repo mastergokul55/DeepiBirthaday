@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Akka Birthday Surprise</title>
+    <style>
+        body{
+            margin:0;
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:linear-gradient(45deg,#ff4e50,#fc913a);
+            font-family:Arial;
+        }
+        .box{
+            background:white;
+            padding:40px;
+            border-radius:20px;
+            text-align:center;
+        }
+        input{
+            padding:10px;
+            width:200px;
+            margin:10px;
+        }
+        button{
+            padding:10px 20px;
+            background:#ff4e50;
+            color:white;
+            border:none;
+            cursor:pointer;
+            border-radius:10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h1>🎂 Akka Birthday Surprise 🎂</h1>
+    <input type="password" id="pass" placeholder="Enter Secret Code">
+    <br>
+    <button onclick="check()">Enter</button>
+    <p id="msg"></p>
+</div>
+
+<script>
+function check(){
+    if(document.getElementById("pass").value === "akka123"){
+        window.location.href="C:/Users/DATAANALYST/Desktop/Deepi Birthday/Suprise.html";
+    } else {
+        document.getElementById("msg").innerHTML="Wrong Password 😜";
+    }
+}
+</script>
+
+</body>
+</html>

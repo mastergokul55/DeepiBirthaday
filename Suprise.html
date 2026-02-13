@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Happy Birthday Akka</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+    margin:0;
+    overflow:hidden;
+    background:radial-gradient(circle at bottom,#000428,#004e92);
+    font-family:Arial;
+    text-align:center;
+    color:white;
+}
+
+/* Intro */
+#intro{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:black;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    z-index:10;
+}
+#intro button{
+    padding:15px 30px;
+    font-size:18px;
+    border:none;
+    background:gold;
+    border-radius:25px;
+    cursor:pointer;
+}
+
+/* Title */
+h1{
+    margin-top:30px;
+    font-size:40px;
+    animation:glow 2s infinite alternate;
+}
+@keyframes glow{
+    from{text-shadow:0 0 10px pink;}
+    to{text-shadow:0 0 30px yellow;}
+}
+
+/* 3D Ring */
+.carousel{
+    position:relative;
+    width:200px;
+    height:300px;
+    margin:60px auto;
+    transform-style:preserve-3d;
+    animation:rotate 20s linear infinite;
+}
+.carousel img{
+    position:absolute;
+    width:200px;
+    height:300px;
+    border-radius:20px;
+    left:0;
+}
+@keyframes rotate{
+    from{transform:rotateY(0deg);}
+    to{transform:rotateY(360deg);}
+}
+
+/* Cake */
+#cake{
+    font-size:80px;
+    cursor:pointer;
+    margin-top:20px;
+}
+#candle{
+    position:relative;
+    top:-60px;
+    font-size:30px;
+}
+
+/* Balloons */
+.balloon{
+    position:absolute;
+    bottom:-150px;
+    width:50px;
+    animation:float 12s linear infinite;
+}
+@keyframes float{
+    from{transform:translateY(0)}
+    to{transform:translateY(-120vh)}
+}
+
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    pointer-events:none;
+}
+</style>
+</head>
+<body>
+
+<div id="intro">
+    <h2>🎬 Special Surprise For My Akka 💖</h2>
+    <button onclick="startParty()">Start Celebration 🎉</button>
+</div>
+
+<canvas id="canvas"></canvas>
+
+<h1>🎉 Happy Birthday My Super Akka 🎉</h1>
+
+<audio id="song" loop>
+<source src="birthday song.mp3" type="audio/mpeg">
+</audio>
+
+<!-- 3D Photo Ring -->
+<div class="carousel">
+    <img src="image 1.jpg" style="transform:rotateY(0deg) translateZ(400px)">
+    <img src="image 2.jpg" style="transform:rotateY(90deg) translateZ(400px)">
+    <img src="image 3.jpg" style="transform:rotateY(180deg) translateZ(400px)">
+    <img src="image 4.jpg" style="transform:rotateY(270deg) translateZ(400px)">
+    <img src="image 5.jpg" style="transform:rotateY(360deg) translateZ(400px)">
+    <img src="image 6.jpg" style="transform:rotateY(450deg) translateZ(400px)">
+    <img src="image 7.jpg" style="transform:rotateY(540deg) translateZ(400px)">
+    <img src="image 8.jpg" style="transform:rotateY(630deg) translateZ(400px)">
+</div>
+
+<!-- Cake -->
+
+<div id="cake" onclick="blowCandle()">🎂</div>
+<div id="candle">🕯️</div>
+
+<!-- Balloons -->
+<img src="https://i.ibb.co/Q9yv5Jk/balloon.png" class="balloon" style="left:10%">
+<img src="https://i.ibb.co/Q9yv5Jk/balloon.png" class="balloon" style="left:40%; animation-delay:3s">
+<img src="https://i.ibb.co/Q9yv5Jk/balloon.png" class="balloon" style="left:70%; animation-delay:6s">
+
+<script>
+var canvas=document.getElementById("canvas");
+var ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+/* Start */
+function startParty(){
+    document.getElementById("intro").style.display="none";
+    document.getElementById("song").play();
+    fireworks();
+}
+
+/* Fireworks Explosion */
+function fireworks(){
+    setInterval(()=>{
+        let x=Math.random()*canvas.width;
+        let y=Math.random()*canvas.height/2;
+        for(let i=0;i<30;i++){
+            ctx.fillStyle="hsl("+Math.random()*360+",100%,50%)";
+            ctx.beginPath();
+            ctx.arc(
+                x + Math.random()*100-50,
+                y + Math.random()*100-50,
+                4,0,Math.PI*2
+            );
+            ctx.fill();
+        }
+    },600);
+}
+
+/* Confetti */
+var pieces=[];
+for(let i=0;i<200;i++){
+    pieces.push({
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        r:Math.random()*5+2,
+        d:Math.random()*4
+    });
+}
+
+function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    pieces.forEach(p=>{
+        ctx.fillStyle="pink";
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fill();
+        p.y+=p.d;
+        if(p.y>canvas.height) p.y=0;
+    });
+}
+setInterval(draw,20);
+
+/* Blow Candle */
+function blowCandle(){
+    document.getElementById("candle").innerHTML="💨";
+
+    alert(`💖 Make a Wish Happy Birthday Akka! May all your dreams come true 💖
+
+அன்பு அக்காவிற்கு,
+
+நீ என் வாழ்க்கையின் முதல் நம்பிக்கை.
+நான் விழும் போதெல்லாம்
+என்னை தூக்கி நிறுத்தும் மௌன வலிமை நீ.
+
+உன் ஒரு சிரிப்பில்
+என் கவலைகள் கரைந்து போகின்றன,
+உன் வார்த்தைகள்
+என் பாதைக்கு விளக்காகின்றன.
+
+என்னை விட அதிகமாக
+என் நலனை நினைக்கும் அன்பு,
+ஒரு வார்த்தை சொல்லாமலே
+எல்லாவற்றையும் புரிந்து கொள்ளும் கவனம் ...
+அதற்கெல்லாம் என் மனமார்ந்த நன்றி, அக்கா.
+
+இன்று உன் பிறந்தநாள் 💐
+உன் வாழ்க்கை முழுவதும்
+ஆரோக்கியமும், மகிழ்ச்சியும்,
+நீ விரும்பும் கனவுகளும்
+உன்னை தேடி வர வேண்டும்.
+
+இனிய பிறந்தநாள் வாழ்த்துகள் 🎂✨
+அன்புடன்,
+உன் தம்பி`);
+}
+</script>
+
+
+</body>
+</html>
+
